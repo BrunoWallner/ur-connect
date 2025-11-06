@@ -110,6 +110,11 @@ impl UrConnect {
             .await
             .context("login request failed")?;
 
+        // inside span with id=contextInformation
+        if !login_res.body.contains("data-user-logged-in=\"true\"") {
+            bail!("invalid login credentials");
+        }
+
         if !login_res.status.is_success() {
             bail!("login failed with status {}", login_res.status);
         }
@@ -166,7 +171,7 @@ impl UrConnect {
                 None
             })
             .ok_or_else(|| anyhow::anyhow!("could not locate ICS URL in timetable pages"))?;
-        
+
         println!("ics URL: {}", &ics_url);
 
         let ics = self
