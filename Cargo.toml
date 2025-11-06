@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 anyhow = "1"
 thiserror = "1"
-reqwest = { version = "0.12", features = ["cookies", "gzip", "brotli", "deflate", "rustls-tls"] }
+reqwest = { version = "0.12", default-features = false, features = ["cookies", "gzip", "brotli", "deflate", "rustls-tls"] }
 cookie_store = "0.21"
 chrono = { version = "0.4", default-features = false, features = ["clock"] }
 html-escape = "0.2"
